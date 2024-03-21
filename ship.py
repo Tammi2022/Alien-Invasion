@@ -2,20 +2,23 @@ import pygame
 
 
 class Ship():
-    def __init__(self, screen):
+    def __init__(self, ai_settings, screen):
         self.screen = screen
 
         # 加载飞船图像并获取其外接矩形
         url_img = "images/rocket.webp"
         image = pygame.image.load(url_img)
-        # 缩放图像
-        self.image = pygame.transform.scale(image, (80, 100))
+        self.image = pygame.transform.scale(image, (80, 100))  # 缩放图像
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
+        self.screen = screen
+        self.ai_settings = ai_settings
 
         # 将每艘新飞船放在屏幕底部中央
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
+
+        self.center = float(self.rect.centerx)  # 在飞船的属性center中存储小数值
 
         # 移动标志
         self.moving_right = False
@@ -30,10 +33,12 @@ class Ship():
     def update(self):
         # 根据移动标志调整飞船的位置
         if self.moving_right:
-            self.rect.centerx += 5
+            self.rect.centerx += self.ai_settings.ship_speed_factor
         if self.moving_left:
-            self.rect.centerx -= 5
+            self.rect.centerx -= self.ai_settings.ship_speed_factor
         if self.moving_up:
-            self.rect.centery -= 5
+            self.rect.centery -= self.ai_settings.ship_speed_factor
         if self.moving_down:
-            self.rect.centery += 5
+            self.rect.centery += self.ai_settings.ship_speed_factor
+
+        self.rect.centerx = self.center
