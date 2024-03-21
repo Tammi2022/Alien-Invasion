@@ -1,7 +1,7 @@
-import sys
 import pygame
 from settings import Settings
 from ship import Ship
+import game_functions as gf
 
 
 def run_game():
@@ -16,12 +16,14 @@ def run_game():
 
     while True:
         # screen.fill(bg_color)
-        screen.fill(ai_settings.bg_color)  # 每次循环时都重绘屏幕
-        ship.blitme()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-        pygame.display.flip() #让最近绘制的屏幕可见
+        # screen.fill(ai_settings.bg_color)  # 每次循环时都重绘屏幕
+        # ship.blitme()
+        gf.check_events()
+        gf.update_screen(ai_settings, screen, ship)
+        # for event in pygame.event.get():
+        #     if event.type == pygame.QUIT:
+        #         sys.exit()
+        pygame.display.flip()  # 让最近绘制的屏幕可见
 
 
 run_game()
