@@ -7,7 +7,9 @@ class Ship():
 
         # 加载飞船图像并获取其外接矩形
         url_img = "images/rocket.webp"
-        self.image = pygame.image.load(url_img)
+        image = pygame.image.load(url_img)
+        # 缩放图像
+        self.image = pygame.transform.scale(image, (80, 100))
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
