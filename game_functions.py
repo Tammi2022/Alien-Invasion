@@ -40,13 +40,14 @@ def check_keyup_events(event, ship):
         ship.moving_down = False
 
 
-def update_screen(ai_settings, screen, ship, alien, bullets):
+def update_screen(ai_settings, screen, ship, aliens, bullets):
     # 更新屏幕上的图像，并切换到新屏幕
     screen.fill(ai_settings.bg_color)
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
-    alien.blitme()
+    # alien.blitme()
+    aliens.draw(screen)
     pygame.display.flip()
 
 

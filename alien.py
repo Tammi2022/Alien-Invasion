@@ -9,7 +9,7 @@ class Alien(Sprite):
         self.ai_settings = ai_settings
         url_img = "images/alien.webp"
         image = pygame.image.load(url_img)
-        self.image = pygame.transform.scale(image, (80, 90))  # 缩放图像
+        self.image = pygame.transform.scale(image, (80, 100))  # 缩放图像
         self.rect = self.image.get_rect()
 
         # 每个外星人最初都在屏幕左上角附近
