@@ -16,11 +16,11 @@ def run_game():
     while True:  # 开始游戏主循环
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
-        bullets.update()
-        for bullet in bullets:
-            if bullet.rect.bottom <= 0:
-                bullets.remove(bullet)
-
+        # bullets.update()
+        # for bullet in bullets:
+        #     if bullet.rect.bottom <= 0:
+        #         bullets.remove(bullet)
+        gf.update_bullets(bullets)
         gf.update_screen(ai_settings, screen, ship, bullets)
 
 

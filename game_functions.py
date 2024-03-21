@@ -48,3 +48,10 @@ def update_screen(ai_settings, screen, ship, bullets):
         bullet.draw_bullet()
     ship.blitme()
     pygame.display.flip()
+
+
+def update_bullets(bulltes):
+    bulltes.updates()  # 更新子弹的位置
+    for bullte in bulltes.copy():
+        if bullte.rect.bottom <= 0:
+            bulltes.remove(bullte)
