@@ -23,3 +23,7 @@ class Alien(Sprite):
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)  # 在指定位置绘制外星人
+
+    def update(self):
+        self.x += self.ai_settings.alien_speed_factor  # 向右移动外星人
+        self.rect.x = self.x
