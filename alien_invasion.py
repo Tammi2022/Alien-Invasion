@@ -24,7 +24,7 @@ def run_game():
         # for bullet in bullets:
         #     if bullet.rect.bottom <= 0:
         #         bullets.remove(bullet)
-        gf.update_bullets(aliens, bullets)
+        gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
         gf.update_aliens(ai_settings, aliens)
         gf.update_screen(ai_settings, screen, ship, aliens, bullets)
 

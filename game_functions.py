@@ -52,7 +52,7 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
     pygame.display.flip()
 
 
-def update_bullets(aliens, bulltes):
+def update_bullets(ai_settings, screen, ship, aliens, bulltes):
     bulltes.update()  # 更新子弹的位置
     for bullte in bulltes.copy():
         if bullte.rect.bottom <= 0:
@@ -60,6 +60,10 @@ def update_bullets(aliens, bulltes):
     # 检查是否有子弹击中了外星人
     # 如果是则删除相应的子弹和外星人
     collisions = pygame.sprite.groupcollide(bulltes, aliens, True, True)
+    if len(aliens) == 0:
+        # 删除现有的子弹并新建一群外星人
+        bulltes.empty()
+        create_fleet(ai_settings, screen, ship, aliens)
 
 
 def fire_bullet(ai_settings, screen, ship, bullets):
