@@ -74,6 +74,8 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bulltes):
     if len(aliens) == 0:
         # 删除现有的子弹并新建一群外星人
         bulltes.empty()
+        # 加快游戏节奏
+        ai_settings.increase_speed()
         create_fleet(ai_settings, screen, ship, aliens)
 
 
@@ -181,6 +183,10 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
         # if play_button.rect.collidepoint(mouse_x, mouse_y):
+        # 重置游戏设置
+        ai_settings.initialize_dynamic_settings()
+
+
         # 隐藏光标
         pygame.mouse.set_visible(False)
 
