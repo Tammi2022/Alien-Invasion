@@ -100,7 +100,8 @@ def get_number_rows(ai_settings, ship_height, alien_height):
     return number_rows
 
 
-def update_aliens(aliens):
+def update_aliens(ai_settings, aliens):
+    check_fleet_edges(ai_settings, aliens)  # 检查是否有外星人位于屏幕边缘，并更新整群外星人的位置
     aliens.update()  # 更新外星人群中所有外星人的位置
 
 
