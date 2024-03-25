@@ -109,7 +109,7 @@ def check_fleet_edges(ai_settings, aliens):
     for alien in aliens.sprites():
         if alien.check_edges():
             change_fleet_direction(ai_settings, aliens)
-            breakpoint()
+            break
 
 
 def change_fleet_direction(ai_settings, aliens):
