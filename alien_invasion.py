@@ -4,6 +4,7 @@ from ship import Ship
 import game_functions as gf
 from pygame.sprite import Group
 from game_stats import GameStats
+from button import Button
 
 
 def run_game():
@@ -13,24 +14,25 @@ def run_game():
     pygame.display.set_caption("Alien Invasion")
 
     stats = GameStats(ai_settings)  # 创建一个用于存储游戏统计信息的实例
-
     ship = Ship(ai_settings, screen)  # 创建一艘飞船
     bullets = Group()  # 创建一个用于存储子弹的编组
     # alien = Alien(ai_settings, screen)  # 创建一个外星人
     aliens = Group()
+    play_button = Button(ai_settings, screen, "Play")
 
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
     while True:  # 开始游戏主循环
         gf.check_events(ai_settings, screen, ship, bullets)
-        ship.update()
-        # bullets.update()
-        # for bullet in bullets:
-        #     if bullet.rect.bottom <= 0:
-        #         bullets.remove(bullet)
-        gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
-        gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
-        gf.update_screen(ai_settings, screen, ship, aliens, bullets)
+        if stats.game_active:
+            ship.update()
+            # bullets.update()
+            # for bullet in bullets:
+            #     if bullet.rect.bottom <= 0:
+            #         bullets.remove(bullet)
+            gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
+            gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
+        gf.update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button)
 
 
 run_game()
