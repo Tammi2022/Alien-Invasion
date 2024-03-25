@@ -57,21 +57,25 @@ def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_bu
     if not stats.game_active:
         play_button.draw_button()
     aliens.draw(screen)
-    pygame.display.flip() # 让最近绘制的屏幕可见
+    pygame.display.flip()  # 让最近绘制的屏幕可见
 
 
-def update_bullets(ai_settings, screen, ship, aliens, bulltes):
-    bulltes.update()  # 更新子弹的位置
-    for bullte in bulltes.copy():
-        if bullte.rect.bottom <= 0:
-            bulltes.remove(bullte)
-    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bulltes)
+def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
+    bullets.update()  # 更新子弹的位置
+    for bullet in bullets.copy():
+        if bullet.rect.bottom <= 0:
+            bullets.remove(bullet)
+    check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bulltes)
 
 
-def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bulltes):
+def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bulltes):
     # 检查是否有子弹击中了外星人
     # 如果是则删除相应的子弹和外星人
     collisions = pygame.sprite.groupcollide(bulltes, aliens, True, True)
+    if collisions:
+        stats.score += ai_settings.alien_points
+        sb.prep_score()
+
     if len(aliens) == 0:
         # 删除现有的子弹并新建一群外星人
         bulltes.empty()
