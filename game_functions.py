@@ -45,18 +45,19 @@ def check_keyup_events(event, ship):
         ship.moving_down = False
 
 
-def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button):
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
     # 更新屏幕上的图像，并切换到新屏幕
     screen.fill(ai_settings.bg_color)
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
-    # alien.blitme
+    # alien.blitme()
+    sb.show_score()  # 显示得分
     # 如果游戏处于非活动状态，就绘制Play按钮
     if not stats.game_active:
         play_button.draw_button()
     aliens.draw(screen)
-    pygame.display.flip()
+    pygame.display.flip() # 让最近绘制的屏幕可见
 
 
 def update_bullets(ai_settings, screen, ship, aliens, bulltes):
@@ -185,7 +186,6 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
         # if play_button.rect.collidepoint(mouse_x, mouse_y):
         # 重置游戏设置
         ai_settings.initialize_dynamic_settings()
-
 
         # 隐藏光标
         pygame.mouse.set_visible(False)
